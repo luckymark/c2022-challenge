@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<math.h>
-int main()
+int main(void) 
 {
   int x=0,yushu=0;
   int prime=1;                                                          
