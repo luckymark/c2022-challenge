@@ -1,23 +1,20 @@
 #include<stdio.h>
-#define MAX 999
+#define MAX 200
 int main(void)
 {
-	int a,b,c=0;
-	int i,j;
-	for(i=100;i<MAX;i++){
-		b=i;
-		for(j=1;j<4;j++){
-			a=b%10;
-			b=b/10;
-			c+=a*a*a;
-		 if(c==i && j==3){
-			printf("%6d",i);
-		 }
-		 if(j==3){
-		 	c=0;
-		 }   
-		}		
-	}
-	
-	return 0;
- } 
+  float year;
+  float a,b,c,d,e,f,g;
+  for(year=1;year<MAX;year++){
+  	a=year/6;
+  	b=year/12;
+  	c=year/7;
+  	d=5;
+  	e=a+b+c+d;
+  	f=year/2;
+  	g=e+f;
+  	if(g==year-4){
+  		printf("%f\n",year-4);
+	  }
+  }
+  return 0;
+} 
