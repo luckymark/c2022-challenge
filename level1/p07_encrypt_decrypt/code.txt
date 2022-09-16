@@ -1,0 +1,60 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<time.h>
+char* encrypt(char* sour,int mov);
+char* decode(char* dest,int mov);
+char* sgets(char* st, int n);
+int main() {
+    srand((unsigned int)time(NULL));
+    int mov;
+    mov = rand() % 256;
+    puts("enter the approximate length of the string:");          //ascii 0-255
+    int n;
+    scanf("%d", &n);
+    while (getchar() != '\n') {
+        continue;
+    }
+    char* ptr = malloc(n * sizeof(char) + 1);
+    if (ptr == NULL) {
+        exit(1);
+    }
+    puts("enter a string:");
+    sgets(ptr,n);
+    printf("encryption: %s\n", encrypt(ptr,mov));
+    printf("after decoding: %s\n", decode(ptr,mov));
+    return 0;
+}
+char* sgets(char* st, int n) {
+    char* ret;
+    char* find;
+    ret = fgets(st, n, stdin);
+    if (ret) {
+        find = strchr(st, '\n');
+        if (find) {
+            *find = '\0';
+        }
+        else {
+            while (getchar() != '\n') {
+                continue;
+            }
+        }
+    }
+    return ret;
+}
+char* encrypt(char* sour,int mov) {
+    int i = 0;
+    while (sour[i] != '\0') {                //溢出后所得数等于原数-256
+        sour[i] += mov;
+        i++;
+    }
+    return sour;
+}
+char* decode(char* dest,int mov) {
+    int j = 0;
+    while (dest[j] != '\0') {
+        dest[j] -= mov;
+        j++;
+    }
+    return dest;
+}
