@@ -1,18 +1,120 @@
 ### C0
 
 1. 打印 “Hello world！I'm 某某某！”
+#include<iostream>
+using namespace std;
+int main()
+{
+	cout << "Hello world！I'm 于润东！";
+	return 0;
+}
 
 ### C1
 
 1. 判断数的正负、判断是否为偶数
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	int a = n < 0 ? 0 : 1;
+	if (a == 0)
+		cout << n << "是负数,";
+	else
+		cout << n << "是正数,";
+	if (n % 2 == 0)
+		cout << "且" << n << "是偶数";
+	else
+		cout << "且" << n << "是奇数";
+	return 0;
+}
 1. 判断一个数是否是13的倍数
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	if (n % 13 == 0)
+		cout << "是";
+	else
+		cout << "不是";
+	return 0;
+}
 1. 判断闰年
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	if (n % 4 == 0 && n % 100 != 0 || n % 400 == 0)
+		cout << "是闰年";
+	else
+		cout << "不是闰年";
+	return 0;
+}
 1. 从2个整数中，找出最大的那个数
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	int a= n > m ? n : m;
+	cout << a;
+	return 0;
+}
 1. 从3个整数中，找出最大的那个数
+#include<iostream>
+using namespace std;
+
+int max(int a, int b)
+{
+	int c = a > b ? a : b;
+	return c;
+}
+int main()
+{
+	int n, m, k;
+	cin >> n >> m >> k;
+	cout << max(n, max(m, k));
+	return 0;
+}
 1. 从n个整数中，找出最大的那个数
+#include<iostream>
+using namespace std;
+
+int max(int a, int b)
+{
+	int c = a > b ? a : b;
+	return c;
+}
+int main()
+{
+	int n, m, k;
+	cin >> n >> m ;
+	for (int i = 0; i < n - 1; i++)
+	{
+		cin >> k;
+		m = max(m, k);
+	}
+	cout << m;
+	return 0;
+}
 
 ### C2
 1. 说1万遍“你好！”
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	for (int i = 0; i < 10000; i++)
+		cout << "你好！" ;
+	return 0;
+}
 2. 尝试以下代码的运行效果(windows环境下)：
 
 ```
@@ -32,11 +134,105 @@
 ```
 
 4. 打印2-100的所有偶数
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	for (int i = 2; i <= 100; i += 2)
+		cout << i << '\t';
+	return 0;
+}
 5. 打印所有1-100，能被3整除，但不能被5整除的数
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	for (int i = 1; i <= 100; i++)
+	{
+		if (i % 3 == 0 && i % 5 != 0)
+			cout << i << '\t';
+	}
+	return 0;
+}
 6. 打印1-100，是7的倍数，或者尾数为7的所有数，并打印这些数的总和
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int sum = 0;
+	for (int i = 1; i <= 100; i++)
+	{
+		if (i % 7 == 0 || i % 10 == 7)
+			sum += i;
+	}
+	cout << sum;
+	return 0;
+}
 7. 打印一个九九表
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int n = 1;
+	for (int i = 1; i <= 9; i++)
+	{
+		for (int j = 1; j <= n; j++)
+			cout << j << '*' << i << '=' << i * j << '\t';
+		n++;
+		cout << endl;
+	}
+	return 0;
+}
 8. 输入n个数，并将它们逆序输出
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int a[1000], n;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+		cin >> a[i];
+	for (int j = 0; j < n-1; j++)
+	{
+		for (int k = j + 1; k < n; k++)
+		{
+			if (a[k] < a[j])
+			{
+				int tmp = a[k];
+				a[k] = a[j];
+				a[j] = tmp;
+			}
+		}
+	}
+	for (int i = 0; i < n; i++)
+		cout << a[i] << '\t';
+	return 0;	
+}
 9. 输入5个0-9的数，输出0-9中没有出现过的数
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	int a[10] = { 0,1,2,3,4,5,6,7,8,9 };
+	for (int i = 0; i < 5; i++)
+	{
+		int n;
+		cin >> n;
+		a[n] = 11;
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (a[i] != 11)
+			cout << a[i] << '\t';
+	}
+	return 0;
+}
 10. 输入5个0-9的数，输入的数从小到大排序（排序方法不限，但鼓励尝试下“桶排序”，不知道什么是“桶排序”的话，可以google之）
 
 ### C3
