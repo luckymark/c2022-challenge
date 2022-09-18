@@ -20,7 +20,7 @@ int main(){
 	
 	for(int i=6;i<=100;i=i+2){
 		for(int num1=1;num1<=num;num1++){
-			for(int num2=1;num2<=num;num2++){
+			for(int num2=1;prime[num1]+prime[num2]<=i;num2++){
 				he=prime[num1]+prime[num2];
 				if(he==i){
 					printf("%d是%d%与%d的和\n",i,prime[num1],prime[num2]);
