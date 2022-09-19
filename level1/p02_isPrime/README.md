@@ -2,6 +2,7 @@
 
 1. 任意输入一个正整数n
 1. 判断n是否为素数
+```
 #include<iostream>
 #include<math.h>
 using namespace std;
@@ -32,3 +33,4 @@ int main()
 	cout << "true";
 	return 0;
 }
+```

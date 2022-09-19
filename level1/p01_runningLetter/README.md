@@ -5,6 +5,7 @@
 1. 在console上输出一个字母（或单词）
 1. 使该字母或单词，按一定速度从左至右运动
 1. 当遇到屏幕边界时反向运动
+```
 #include<iostream>
 #include<windows.h>
 using namespace std;
@@ -26,5 +27,6 @@ int main()
 	}
 	return 0;
 }
+```
 
 

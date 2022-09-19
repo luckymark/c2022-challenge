@@ -5,6 +5,7 @@
 1. 在控制台上显示一个迷宫，包括：墙、玩家、出口等；
 1. 通过上下左右键，控制玩家行走；
 1. 当玩家到达出口，则显示玩家赢得了游戏；
+```
 #include<stdio.h>
 #include<conio.h>
 #include<iostream>
@@ -44,3 +45,4 @@ int main()
     }
         return 0;
 }
+```

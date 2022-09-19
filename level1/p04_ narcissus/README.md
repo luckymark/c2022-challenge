@@ -5,6 +5,7 @@
 水仙花数：n位数的每个数位的n次方之和等于该n位数本身
 
 例如：153=1^3+5^3+3^3
+```
 #include<iostream>
 #include<math.h>
 using namespace std;
@@ -25,3 +26,4 @@ int main()
 	}
 	return 0;
 }
+```

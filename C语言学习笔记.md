@@ -26,3 +26,30 @@ fscanf（fptr，"%s",char *);
 fclose(fptr);
 5,输入带空格的字符串
 scanf("%[^\n]",char *a);
+6.修改、提交代码：
+
+git status
+git add .
+git commit -m "完成了running letter"
+git push
+
+7.创建本地仓库：
+
+git clone https://github.com/ **YourGithubAccount** /c2022-challenge
+cd c2022-challenge
+ls
+
+git config user.name "???"
+git config user.email "???"
+
+git remote -v
+git remote add upstream https://github.com/luckymark/c2022-challenge
+
+8.从 https://github.com/luckymark/c2022-challenge 获取更新
+
+git fetch upstream
+git merge upstream/master
+
+8.判断两个字符串相等
+strcmp(a,b);
+若返回0则相等，否则为1或-1；

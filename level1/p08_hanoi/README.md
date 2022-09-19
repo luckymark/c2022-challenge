@@ -18,6 +18,7 @@
     A -> C
     B -> C
     ...
+```
 #include<iostream>
 using namespace std;
 
@@ -43,3 +44,4 @@ int main()
 	hanoi(n, 'A', 'B', 'C');
 	return 0;
 }
+```

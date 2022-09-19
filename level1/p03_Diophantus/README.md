@@ -15,6 +15,7 @@
 年级是他的一半。
 
 问儿子死时丢番图多大？
+```
 #include<iostream>
 #include<math.h>
 using namespace std;
@@ -37,3 +38,4 @@ int main()
 	cout << n - 4;
 	return 0;
 }
+```

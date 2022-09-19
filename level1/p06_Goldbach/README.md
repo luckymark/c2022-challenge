@@ -1,6 +1,7 @@
 ### 功能要求：
 
 1. 在100范围内验证哥德巴赫猜想的正确性
+```
 #include<iostream>
 #include<math.h>
 #include<time.h>
@@ -37,3 +38,4 @@ int main()
 	cout << end - start;
 	return 0;
 }
+```

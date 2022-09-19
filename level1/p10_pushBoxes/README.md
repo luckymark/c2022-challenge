@@ -7,6 +7,7 @@
 1. 当玩家将所有箱子归位，则显示玩家赢得了游戏；
 1. 按玩家走动步数记分；
 1. 设计多个关卡，每一关的地图从文件中读取，玩家每关的分数记录到文件中；
+```
 #include <iostream>
 #include <stdio.h>
 #include <conio.h>
@@ -268,3 +269,4 @@ int main()
     fenshu(m);
     return 0;
 }
+```
