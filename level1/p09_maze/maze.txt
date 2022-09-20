@@ -1,0 +1,304 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<stdbool.h>
+#include<windows.h>
+#include<conio.h>
+#define LEN 30
+
+void dig(int(*maze)[LEN], int x, int y);       //注意二级指针和指向二维数组的指针移动单位不同
+typedef struct coor {
+    int x;
+    int y;
+}Coor;
+Coor setstart(int(*maze)[LEN]);
+Coor setfinish(int(*maze)[LEN], Coor co);
+int(*startup(int(*maze)[LEN]))[LEN];      //非常奇怪的函数返回类型，但是我不太想用二级指针，毕竟和二维数组名终究不同
+bool startisnotaround(Coor co, int x, int y);            //设置终点的时候判断是否起点在旁边
+void showmaze(int(*maze)[LEN]);
+void gotoxy(int x, int y);                          //一个比较神奇的函数，函数体不是我写的
+void HideCursor(void);
+void move(int(*maze)[LEN], int* x, int* y);
+bool hit(int(*maze)[LEN], int* x, int* y);                          //判断是否撞墙，每次move后使用
+bool win(Coor end, int* x, int* y);
+
+int main() {
+    HideCursor();
+    int maze[LEN][LEN];
+    startup(maze);                                   //先铺设框架
+    srand((unsigned int)(time(0)));
+    int x1 = LEN / 2;
+    int y1 = LEN / 2;
+    dig(maze, x1, y1);                   //这里最初想先设起点在从起点开始dig，不过这样全图挖得就不太均衡，只好尝试起点和终点的设置采取同样方式
+    Coor co = setstart(maze);            //co是起点坐标
+    Coor end = setfinish(maze, co);       //end是终点坐标
+    showmaze(maze);
+    printf("you'll be born on'S' ,and the destination is marked with'D'.\n");
+    printf("be careful: hit the wall and you'll lose.\n");
+    gotoxy(end.x, end.y);
+    printf("D");
+    gotoxy(co.x, co.y);
+    printf("S");
+    Coor cur = co;
+    Sleep(1000);                         //'S'不要一闪而过吧
+    printf("\bo\b");
+
+    while (1) {
+        move(maze, &cur.x, &cur.y);
+        if (win(end, &cur.x, &cur.y)) {
+            printf("you win!");
+            exit(0);
+        }
+    }
+    return 0;
+}
+
+int(*startup(int(*maze)[LEN]))[LEN] {
+    for (int i = 1; i < LEN - 1; ++i) {                //0表示没有挖
+        for (int j = 1; j < LEN - 1; ++j) {
+            maze[i][j] = 0;
+        }
+    }
+    for (int j = 0; j < LEN; ++j) {
+        maze[0][j] = 1;
+    }
+    for (int j = 0; j < LEN; ++j) {
+        maze[LEN - 1][j] = 1;
+    }
+    for (int i = 0; i < LEN; ++i) {
+        maze[i][0] = 1;
+    }
+    for (int i = 0; i < LEN; ++i) {        //完成边界不可穿越的设置
+        maze[i][LEN - 1] = 1;
+    }
+    return maze;
+}
+void dig(int(*maze)[LEN], int x, int y) {                               //一个是防止回环，另一个是防止出现面积较大的空地
+    if (maze[x][y] == 0) {                                               //实际上边界-1才是外墙，边界因为设置为1所以不会显示
+        if (maze[x + 1][y] + maze[x - 1][y] + maze[x][y + 1] + maze[x][y - 1] <= 1) {
+            maze[x][y] = 1;
+            int direction[] = { 0,1,2,3 };
+            for (int j = 4; j > 0; --j) {                 //这里原本想的是循环四次每次不重复，那不就每个方向在每个节点上都会走一遍了吗，所以绕了好几个弯才采取了这个方案
+                int r = rand() % 4;                          //尝试各种低级算法失败后，才发现递归的顺序导致尽管每个方向都会被调用一次，但不是每个方向都会执行
+                int temp = direction[r];                   //这个地方的思想就是，想要挖得尽量多和满，那么每个方向都要尝试一遍
+                direction[r] = direction[j - 1];             //由于增加了防回环判断，所以不会每个方向都成功执行
+                direction[j - 1] = temp;
+                switch (direction[j - 1]) {
+                case 0:
+                    dig(maze, x - 1, y);
+                    break;
+                case 1:
+                    dig(maze, x + 1, y);
+                    break;
+                case 2:
+                    dig(maze, x, y + 1);
+                    break;
+                case 3:
+                    dig(maze, x, y - 1);
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+    }                                           //接下来处理起点和终点的设置问题
+}
+Coor setstart(int(*maze)[LEN]) {                           //屏幕左上角为原点，左右为x，上下为y
+    Coor* pt = (Coor*)malloc(300 * sizeof(Coor));             //边界：x，y=0，LEN-1     外墙：x，y=1，LEN-2
+    if (pt) {
+        int count = 0;
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[2][i] == 1) {
+                pt[count].x = 2;
+                pt[count].y = i;
+                count++;
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[LEN - 3][i] == 1) {
+                pt[count].x = LEN - 3;
+                pt[count].y = i;
+                count++;
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[i][2] == 1) {
+                pt[count].x = i;
+                pt[count].y = 2;
+                count++;
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[i][LEN - 3] == 1) {
+                pt[count].x = i;
+                pt[count].y = LEN - 3;
+                count++;
+            }
+        }                                                   //把所有靠着外墙且被挖去的点放到结构数组中，随机选择一个作起点
+        if (count == 0) {
+            printf("this program is too bad that no border is set to be 1");    //最初测试算法用的
+            exit(1);
+        }
+        int rd = rand() % count;
+        Coor co = pt[rd];
+        free(pt);
+        return co;
+    }
+    else {
+        puts("not enough memory left.");
+        exit(2);
+    }
+}
+Coor setfinish(int(*maze)[LEN], Coor co) {
+    Coor* pt = (Coor*)malloc(300 * sizeof(Coor));
+    if (pt) {
+        int count = 0;
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[2][i] == 1) {
+                if (startisnotaround(co, 2, i)) {
+                    pt[count].x = 2;
+                    pt[count].y = i;
+                    count++;
+                }
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[LEN - 3][i] == 1) {
+                if (startisnotaround(co, LEN - 3, i)) {
+                    pt[count].x = LEN - 3;
+                    pt[count].y = i;
+                    count++;
+                }
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[i][2] == 1) {
+                if (startisnotaround(co, i, 2)) {
+                    pt[count].x = i;
+                    pt[count].y = 2;
+                    count++;
+                }
+            }
+        }
+        for (int i = 2; i < LEN - 2; ++i) {
+            if (maze[i][LEN - 3] == 1) {
+                if (startisnotaround(co, i, LEN - 3)) {
+                    pt[count].x = i;
+                    pt[count].y = LEN - 3;
+                    count++;
+                }
+            }
+        }
+        int rd = rand() % count;
+        Coor end = pt[rd];
+        free(pt);
+        return end;
+    }
+    else {
+        puts("not enough memory left.");
+        exit(2);
+    }
+}
+bool startisnotaround(Coor co, int x, int y) {
+    if (x + 1 != co.x && x - 1 != co.x && y + 1 != co.y && y - 1 != co.y) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+void showmaze(int(*maze)[LEN]) {
+    for (int i = 0; i < LEN; ++i) {
+        for (int j = 0; j < LEN; ++j) {
+            if (maze[j][i] == 0) {
+                printf("*");
+            }
+            else if (maze[j][i] == 1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+    }
+}
+void gotoxy(int x, int y) {
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD pos;
+    pos.X = x;
+    pos.Y = y;
+    SetConsoleCursorPosition(handle, pos);
+}
+void move(int(*maze)[LEN], int* x, int* y) {
+    char input;
+    if (_kbhit()) {
+        printf(" ");                                     //先把当前位置给消除
+        input = _getch();
+        if (input == 'a') {
+            --(*x);
+            gotoxy(*x, *y);                          //先自减后gotoxy
+            if (!hit(maze, x, y)) {
+                printf("o\b");                         //玩家为'o'
+            }
+            else {
+                system("cls");
+                printf("you die!");
+                exit(1);
+            }
+        }
+        else if (input == 'd') {
+            ++(*x);
+            gotoxy(*x, *y);
+            if (!hit(maze, x, y)) {
+                printf("o\b");
+            }
+            else {
+                system("cls");
+                printf("you die!");
+                exit(1);
+            }
+        }
+        else if (input == 'w') {
+            --(*y);
+            gotoxy(*x, *y);
+            if (!hit(maze, x, y)) {
+                printf("o\b");
+            }
+            else {
+                system("cls");
+                printf("you die!");
+                exit(1);
+            }
+        }
+        else if (input == 's') {
+            ++(*y);
+            gotoxy(*x, *y);
+            if (!hit(maze,x,y)) {
+                printf("o\b");
+            }
+            else {
+                system("cls");
+                printf("you die!");
+                exit(1);
+            }
+        }
+    }
+}
+bool hit(int(*maze)[LEN], int* x, int* y) {                                               
+    if (maze[*x][*y] == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+void HideCursor(void) {
+    CONSOLE_CURSOR_INFO cursor_info = { 1,0 };              //第二个值0表示隐藏光标
+    SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor_info);
+}
+bool win(Coor end, int* x, int* y) {
+    if (end.x == *x && end.y == *y) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
