@@ -1,6 +1,6 @@
 # c2022-挑战班
 
-## 基本操作流程
+## 基本操作流程 
 
 1. 从 [https://github.com/luckymark/c2022-challenge](https://github.com/luckymark/c2022-challenge) fork 到你自己的 github 中
 2. 创建本地仓库：
