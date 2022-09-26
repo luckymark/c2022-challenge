@@ -1,0 +1,14 @@
+#include<stdio.h>  
+int main(void) {                              
+	int i, j, h;
+	for (i = 1; i <= 9; i++) {
+		for (j = 0; j <= 9; j++) {
+			for (h = 0; h <= 9; h++) {
+				if (i * i * i + j * j * j + h * h * h == i * 100 + j * 10 + h) {
+					printf("%d%d%d\n", i, j, h);
+				}
+			}
+		}
+	}
+	return 0;
+}

@@ -1,0 +1,6 @@
+model:F1
+amount:100
+model:f5
+amount:23
+model:f8
+amount:23

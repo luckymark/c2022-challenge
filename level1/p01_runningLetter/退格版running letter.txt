@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+#include<Windows.h>
+#define MAX 80                                //都做的常规版本，我来个退格版的
+int main(void) {                              //退格版代码稍显复杂，不过可以解决常规版长度较长时因为打印空格所需循环
+	puts("enter a letter or a word:");        //次数不一致而产生的变速问题
+	char st[20];
+	scanf("%s", st);
+	int len = strlen(st),cur=1,vel=1;
+	printf("%s", st);
+	Sleep(30);
+	int LEN = MAX - len;
+	while (1) {
+		if (cur == 0 || cur == LEN) {
+			vel = -vel;
+		}
+		for (int i = 0; i < len; i++) {
+			printf("\b");
+		}
+		for (int j = 0; j < len; j++) {
+			printf(" ");
+		}
+		for (int h = 0; h < len; h++) {
+			printf("\b");
+		}
+		if (vel == 1) {
+			printf(" %s", st);
+			cur += vel;
+		}
+		else if (vel == -1) {
+			printf("\b%s", st);
+			cur += vel;
+		}
+		Sleep(30);
+	}
+	return 0;
+}

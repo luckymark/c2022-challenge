@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+void hanoi(int n, char from, char by, char to);
+int main() {
+    setbuf(stdout,0);                                  //解决clion调试时printf不能实时输出到控制台的问题
+    puts("initially,the plates are on A\n");
+    char a = 'A', b = 'B', c = 'C';
+    int n = 64;                                 //n=64,一个从来没有运行到结束的程序
+    hanoi(n, a, b, c);              //最顶层：a by b to c
+    return 0;
+}
+void hanoi(int n,char from,char by,char to) {        //传递指针占用内存和运行速度可能快点吧
+    static unsigned long long count = 0;
+    if (n > 2) {
+        hanoi(n - 1, from, to, by);
+        printf("%d : %c -> %c\n", ++count,from, to);
+        hanoi(n - 1, by, from, to);
+    }
+    else if(n==2){
+        hanoi(n-1,from,by,to);
+    }
+    else if(n==1){
+        printf("%d : %c -> %c\n",++count, from, by);
+        printf("%d : %c -> %c\n",++count, from, to);
+        printf("%d : %c -> %c\n",++count, by, to);
+    }
+}
