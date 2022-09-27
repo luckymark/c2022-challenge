@@ -1,0 +1,2 @@
+Find the exit successfully!
+Your time cost is 8 s
