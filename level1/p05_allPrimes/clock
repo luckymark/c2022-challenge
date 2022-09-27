@@ -1,7 +1,7 @@
-#include<stdio.h>
-#include<math.h>
-#include<time.h>
-#include<windows.h>
+#include<stdio.c>
+#include<math.c>
+#include<time.c>
+#include<windows.c>
 
 void special(int a);
 
