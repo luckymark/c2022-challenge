@@ -5,11 +5,12 @@ void JiaMi(char *ar,unsigned num);
 void JieMi(char *ar,unsigned num);
 int main(){
 	char ShuRu[1000]={'0'},ShuChu[1000]={'0'};
+	
 	scanf("%s",ShuRu);
 	JiaMi(ShuRu,strlen(ShuRu));
-	printf("%s\n",ShuRu);
+	
 	JieMi(ShuRu,strlen(ShuRu));
-	printf("%s",ShuRu);
+	
 	return 0;	
 }
 
@@ -48,6 +49,8 @@ void JiaMi(char *ar,unsigned num){
 	}
 	*(ar+4*M+m-1)=temp;
 	}
+	
+	printf("%s\n",ar);
 }
 
 void JieMi(char *ar,unsigned num){
@@ -86,6 +89,7 @@ void JieMi(char *ar,unsigned num){
 			*(ar+i)=*(ar+i)-5;
 		}
 	}
+	printf("%s",ar);
 }
 
 
