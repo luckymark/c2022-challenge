@@ -29,7 +29,11 @@ int hanoi(int n,char x,char y,char z){
 }
 
 int move(char getone,int n,char putone){
-	
+	//static int k=1;
+	//printf("%2d:%3d # %c->%c\n",k,n,getone,putone);
+	//if(k++%3==0){
+	//	putchar('\n');
+	//}
 	printf(" %c->%c\n",getone,putone);
 	
 	return 0;
