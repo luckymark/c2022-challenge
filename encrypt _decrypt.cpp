@@ -28,7 +28,7 @@ void decrypt() {
 				putchar(--code);
 			}
 			else if (code == 'a' || code == 'A') {
-				putchar(code -= 25);
+				putchar(code += 25);
 			}
 			else if (code == '0') { putchar('9'); }
 			else putchar(code);
