@@ -1,6 +1,8 @@
 ﻿#include <stdio.h>
 #include<stdlib.h>
-int main() {  
+#include<conio.h>
+#include<windows.h>
+int main() {
 	char ar[11][40] = {
 " 00000000000000000000000000000000000000",
 " 00000  000000000    00000000    0000 @",
@@ -11,16 +13,16 @@ int main() {
 " 0  0   00      0   0   0   0   0   0 0",
 " 00 0 000    00 0 0 00 0000 0 0 0 0 0 0",
 " 0#       0000    0       0   0   0   0",
-" 00000000000000000000000000000000000000",
+" 00000000000000000000000000000000000000"
 	};
 	char cha;
 	int x = 8, y = 2, a = 1, b = 38;
-	int i,flag=0;
+	int i, flag = 0;
 	for (i = 0; i < 10; ++i) {
 		puts(ar[i]);
 	}
 	while (x != a || y != b) {
-		cha = getchar();
+		cha = _getch();
 		if (cha == 's' && ar[x + 1][y] != '0') {
 			ar[x][y] = ' ';
 			ar[++x][y] = '#';
@@ -45,7 +47,8 @@ int main() {
 		for (i = 0; i < 10; ++i) {
 			puts(ar[i]);
 		}
+		Sleep(100);
 	}
-	printf("You win!Goal is %d",167-flag);
+	printf("You win!Goal is %d", 167 - flag);
 	return 0;
 }
