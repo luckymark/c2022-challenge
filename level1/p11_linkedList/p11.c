@@ -32,6 +32,7 @@ int main() {
     }
     return 0;
 }
+
 void creat(int n) {
     head = (linklist*) malloc(sizeof(linklist));
     end = head;
