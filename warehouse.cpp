@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<windows.h>
+#include<string.h>
 const int max = 1000;
+char m;
 typedef struct {
 	char name[20];
 	int amount;
@@ -14,15 +16,16 @@ void menu(void) {
 	printf("0.exit\n1.import\n2.export\n3.show record\n");
 }
 void import(Shop*shop) {
-	if (shop->num = max) {
+	if (shop->num == max) {
 		printf("full");
 	}
 	else {
 		system("cls");
-		printf("cin>>name");
+		printf("cin>>name\n");
 		scanf_s(" %s", shop->goods[shop->num].name, 20);
-		printf("cin>>amount");
+		printf("cin>>amount\n");
 		scanf_s("%d", &shop->goods[shop->num].amount);
+		m=getchar();
 		++shop->num;
 	}
 }
@@ -36,15 +39,17 @@ int searchGoods(Shop*shop,char name[20]) {
 	return 0;
 }
 void ex(Shop* shop) {
-	printf("cin>>name");
+	system("cls");
+	printf("cin>>name\n");
 	char name[20];
 	scanf_s("%s", name, 20);
+	m = getchar();
 	int i = searchGoods(shop,name);
 	if (!i) {
 		printf("none");
 	}
 	else {
-		printf("cin>>amount");
+		printf("cin>>amount\n");
 		scanf_s("%d", &shop->goods[i].amount);
 	}
 }
@@ -62,22 +67,18 @@ void show(Shop*shop) {
 			printf("%d\n", shop->goods[i].amount);
 		}
 	}
+	system("pause");
 }
 int read(Shop*shop) {
 	FILE* fp;
 	 fopen_s(&fp,"record.txt", "r");
-	if (!fp)
-	{
+	if (!fp){
 		printf("fail");
 		return -1;
 	}
-	for (int i = 0; !feof(fp); ++i)
-	{
-		
-		fscanf_s(fp, "%s %d\n", shop->goods[i].name,20, &shop->goods[i].amount);
-		
-			shop->num = i + 1;
-		
+	for (int i = 0; !feof(fp); ++i){	
+	fscanf_s(fp, "%s %d\n", shop->goods[i].name,20, &shop->goods[i].amount);			
+	shop->num = i + 1;	
 	}
 	fclose(fp);
 	return 0;
@@ -96,12 +97,15 @@ int save(Shop*shop) {
 	return 0;
 }
 int main() {
-	Shop* shop=(Shop*)malloc(sizeof(Shop*));
-	read(shop);
+	Shop* shop=(Shop*)malloc(sizeof(Shop));
+	if (shop) {
+		shop->num = 0;
+	}
 	int deside;
 	while (1){
 		menu();
 		scanf_s("%d", &deside);
+		m=getchar();
 		switch (deside){
 		case 0:save(shop); break;
 		case 1:import(shop);break;
