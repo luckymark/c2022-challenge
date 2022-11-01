@@ -1,15 +1,14 @@
 #include<stdio.h>
 #include<windows.h>
-#include<string.h>
 const int max = 1000;
 char m;
 typedef struct {
 	char name[20];
 	int amount;
 }Goods;
-typedef struct Shop {
+typedef struct  {
 	Goods goods[max];
-	int num=0;
+	int num;
 }Shop;
 void menu(void) {
 	system("cls");
@@ -23,6 +22,7 @@ void import(Shop*shop) {
 		system("cls");
 		printf("cin>>name\n");
 		scanf_s(" %s", shop->goods[shop->num].name, 20);
+		m=getchar();
 		printf("cin>>amount\n");
 		scanf_s("%d", &shop->goods[shop->num].amount);
 		m=getchar();
@@ -43,7 +43,7 @@ void ex(Shop* shop) {
 	printf("cin>>name\n");
 	char name[20];
 	scanf_s("%s", name, 20);
-	m = getchar();
+	m=getchar();
 	int i = searchGoods(shop,name);
 	if (!i) {
 		printf("none");
@@ -51,6 +51,7 @@ void ex(Shop* shop) {
 	else {
 		printf("cin>>amount\n");
 		scanf_s("%d", &shop->goods[i].amount);
+		m = getchar();
 	}
 }
 void show(Shop*shop) {
@@ -71,7 +72,7 @@ void show(Shop*shop) {
 }
 int read(Shop*shop) {
 	FILE* fp;
-	 fopen_s(&fp,"record.txt", "r");
+	fopen_s(&fp,"record.txt", "r");
 	if (!fp){
 		printf("fail");
 		return -1;
@@ -105,9 +106,9 @@ int main() {
 	while (1){
 		menu();
 		scanf_s("%d", &deside);
-		m=getchar();
+		m = getchar();
 		switch (deside){
-		case 0:save(shop); break;
+		case 0:save(shop); return 0;
 		case 1:import(shop);break;
 		case 2:ex(shop);break;
 		case 3:show(shop);break;
