@@ -1,0 +1,21 @@
+#include<stdio.h>
+
+
+int move(int n, char x, char y, char z)
+{
+	if (n == 1)
+		printf("%c-->%c\n", x, z);//要注意递归的条件
+	else
+	{
+		move(n - 1, x, z, y);
+		printf("%c-->%c\n", x, z);
+		move(n - 1, y, x, z);//递归
+	}
+	return 0;
+}
+int main(void)
+{
+	int n;
+	scanf_s("%d", &n);
+	move(n, 'A', 'B', 'C');
+	return 0;
