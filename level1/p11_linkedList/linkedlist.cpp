@@ -54,13 +54,12 @@ void NiXu(struct Stu* head) {
 	}
 	end->next = head->next;
 
-	temp[0] = head->next->next;//第二个节点 
-	temp[1] = temp[0]->next;//第三个节点
-	temp[2] = temp[1]->next;//第四个节点
+	temp[0] = head->next->next;//逻辑上的第二个节点 
+	temp[1] = temp[0]->next;//逻辑上的第三个节点
+	temp[2] = temp[1]->next;//逻辑上的第四个节点
 	temp[0]->next = head->next;
 	temp[1]->next = temp[0];
-	temp[0] = temp[2]->next;
-	//前提：链表长度大于等于4个节点 
+	temp[0] = temp[2]->next; 
 	while (j<n-3) {
 		temp[i]->next = temp[(i + 2) % 3];
 		temp[(i + 2) % 3] = temp[(i + 1) % 3]->next;
