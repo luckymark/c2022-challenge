@@ -1,5 +1,5 @@
 #include"p10_pushBoxes.h"
-extern char ar[ROW][QUEUE] ;
+
 void savegoal(int Goal) {
 	FILE* fp;
 	fopen_s(&fp, "C:\\Users\\86134\\source\\repos\\p10_pushBoxes\\goal.txt", "a");
