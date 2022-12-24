@@ -1,5 +1,5 @@
 #include"p10_pushBoxes.h"
-
+char ar[ROW][QUEUE];
 void savegoal(int Goal) {
 	FILE* fp;
 	fopen_s(&fp, "C:\\Users\\86134\\source\\repos\\p10_pushBoxes\\goal.txt", "a");
@@ -11,7 +11,7 @@ void savegoal(int Goal) {
 	fprintf(fp, "%d\n", Goal);
 	fclose(fp);
 }
-void map(char MAP[100]) {
+void map(const char MAP[100]) {
 	FILE* fp;
 	fopen_s(&fp, MAP, "r");
 	if (fp == NULL) {
