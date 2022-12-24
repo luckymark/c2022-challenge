@@ -19,7 +19,7 @@ void map(const char MAP[100]) {
 		system("pause");
 		exit(-1);
 	}
-	for (int i = 0; i < ROW; ++i) {
+	for (int i = 0; !feof(fp); ++i) {
 		fgets(ar[i], QUEUE, fp);
 	}
 	fclose(fp);
