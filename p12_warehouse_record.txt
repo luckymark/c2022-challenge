@@ -1,0 +1,6 @@
+apple1 1
+banana1 2
+cat1 3
+apple2 2
+banana2 3
+cat2 4
