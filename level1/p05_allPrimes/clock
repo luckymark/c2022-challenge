@@ -3,15 +3,18 @@
 #include<time.c>
 #include<windows.c>
 
-void special(int a);
+void special(int a)
+{
+	int i;
+	for (i = 2; i <=sqrt(a); i++)
+		if (a % i == 0) return;
+	printf("%d\n", a);
+}
 
 int main(void)
 {
 	int a=2;
-	for (a = 2; a < 1000; a++)
-	{
-		special(a);
-	}
+	for (a = 2; a < 1000; a++)special(a);
 	time(0);
 	time_t t_begin, t_end;
 	time(&t_begin);
@@ -20,15 +23,4 @@ int main(void)
 	double total_time = difftime(t_end, t_begin);
 	printf("the time is %f\n", total_time);
 	return 0;
-}
-
-void special(int a)//取出语句，封存为函数，该函数作用为快速计算是否为素数
-{
-	int i;
-	for (i = 2; i <=sqrt(a); i++)
-		if (a % i == 0)
-		{
-			return;
-		}
-	printf("%d\n", a);
 }
