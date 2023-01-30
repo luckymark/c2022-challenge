@@ -3,7 +3,7 @@ project(Gobang C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Gobang main.c graphics.c head.h evaluate.c zobrist.c testcase.c)
+add_executable(Gobang main.c graphics.c head.h evaluate.c zobrist.c gameplay.c)
 
 
 set(CMAKE_C_FLAGS "-framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo")

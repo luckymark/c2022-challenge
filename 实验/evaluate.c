@@ -5,45 +5,77 @@ int comAddVal[4][4][4][4][4][4][4][4];
 int humDeVal[4][4][4][4][4][4][4][4];
 int comDeVal[4][4][4][4][4][4][4][4];
 
-int evaluate(int (*gobang)[SIZE],int x, int y, int playerNum,int humNum,int comNum) {
+int evaluate(int (*gobang)[SIZE],int x, int y, int playerNum) {
     int netScore=0;
     int h=1,v=0;
     if (playerNum==humNum){
-        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=0;
         v=1;
-        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=1;
         v=1;
-        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=1;
         v=-1;
-        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=humDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=humAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
     }
     else if (playerNum==comNum){
-        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=0;
         v=1;
-        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=1;
         v=1;
-        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
         h=1;
         v=-1;
-        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
-        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]][gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]][gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore-=comDeVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
+        netScore+=comAddVal[gobang[y - 4 * v][x - 4 * h]][gobang[y - 3 * v][x - 3 * h]]
+                [gobang[y - 2 * v][x - 2 * h]][gobang[y - v][x - h]][gobang[y + v][x + h]]
+                [gobang[y + 2 * v][x + 2 * h]][gobang[y + 3 * v][x + 3 * h]][gobang[y + 4 * v][x + 4 * h]];
     }
     return netScore;
 }
 
-void setDeleteVal(int playerNum,int oppoNum,int humNum,int comNum){
+void setDeleteVal(int playerNum,int oppoNum){
     int p=playerNum,r=oppoNum,factor=1;
     int (*temp)[4][4][4][4][4][4][4];
     if (playerNum==humNum){
@@ -216,7 +248,7 @@ void setDeleteVal(int playerNum,int oppoNum,int humNum,int comNum){
     }
 }
 
-void setAddVal(int playerNum,int oppoNum,int humNum,int comNum){
+void setAddVal(int playerNum,int oppoNum){
     int p=playerNum,r=oppoNum,factor=1;
     int (*temp)[4][4][4][4][4][4][4];
     if (playerNum==humNum){

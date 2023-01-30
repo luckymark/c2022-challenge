@@ -3,7 +3,7 @@
 uint64_t humTable[SIZE][SIZE];
 uint64_t comTable[SIZE][SIZE];
 uint64_t key;
-//uint64_t keyLock;
+
 Hash zobristCache[TABLE_SIZE];
 
 uint64_t get64rand() {
@@ -17,7 +17,7 @@ uint64_t get64rand() {
 void initZobrist(void){
     for (int i = 0; i < SIZE; ++i) {
         for (int j = 0; j < SIZE; ++j) {
-            humTable[i][j]=get64rand();
+            humTable[i][j]=get64rand(); //为不同玩家、不同位置的棋子生成键值
             comTable[i][j]=get64rand();
         }
     }
@@ -25,5 +25,4 @@ void initZobrist(void){
         zobristCache[i].value=-INF;
     }
     key=0;
-    //keyLock=get64rand();
 }
