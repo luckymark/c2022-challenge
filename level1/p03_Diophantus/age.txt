@@ -1,0 +1,10 @@
+#include<stdio.h>  
+#include<math.h>
+#define media 1                 //题意：儿子的寿命是丢番图的寿命的一半（？）
+int main(void) {                              
+	float age=media;
+	float child = age / 6, youth = age / 12, bac = age / 7, mar = 5.0, son = age / 2, ans;
+	ans = (mar + 4) /(age- (child + youth + bac + son));
+	printf("he was %.0lf years old when his son died", round((double)(ans-4)));
+	return 0;
+}
