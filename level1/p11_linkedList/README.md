@@ -12,3 +12,6 @@
 
 欢迎大神们都去玩玩这个：
 [Level2-实现 SkipList 算法](../../level2/SkipList/Readme.md)
+
+### 注：
+以完成全部上述功能，且封装成函数。
