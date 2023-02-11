@@ -3,6 +3,7 @@ int innerBoard[15][15] = { 0 };
 HWND hwnd;   
 
 void displayBoard();
+void initBoard();
 void regretButton(int x, int y, int w, int h, TCHAR* text)
 {
 	setbkmode(TRANSPARENT);
@@ -16,6 +17,19 @@ void regretButton(int x, int y, int w, int h, TCHAR* text)
 }
 
 int main()
+{
+	initBoard();
+	for (int a = 0; a < 15; a++) {
+		for (int b = 0; b < 15; b++) {
+			innerBoard[a][b] = 0;
+		}
+	}
+	menu();
+	system("pause");
+	return 0;
+}
+
+void initBoard() 
 {
 	int i, j;
 	Point p, lp;
@@ -51,17 +65,9 @@ int main()
 	Mouse = GetMouseMsg();
 	short x = 0;
 	short y = 0;
-	hwnd = GetHWnd();//窗口置前
-	for (int a = 0; a < 15; a++) {
-		for (int b = 0; b < 15; b++) {
-			innerBoard[a][b] = 0;
-		}
-	}
-	menu();
-	system("pause");
-	return 0;
+	hwnd = GetHWnd();
+	
 }
-
 void displayBoard()
 {
 	for (int i = 0; i < 15; i++) {
@@ -74,21 +80,13 @@ void displayBoard()
 				setfillcolor(WHITE);
 				solidcircle(i * 30, j * 30, 10);
 			}
-			if (innerBoard[i][j] == 3) {
-				cleardevice();
-				for (int i = 0; i < 15; i++) {
-					for (int j = 0; j < 15; j++) {
-						if (innerBoard[i][j] == 1) {
-							setfillcolor(BLACK);
-							solidcircle(i * 30, j * 30, 10);
-						}
-						if (innerBoard[i][j] == 2) {
-							setfillcolor(WHITE);
-							solidcircle(i * 30, j * 30, 10);
-						}
-					}
-				}
-			}
+			
 		}
 	}
+}
+void reinit()
+{
+	cleardevice();
+	initBoard();
+	displayBoard();
 }
