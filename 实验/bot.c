@@ -75,39 +75,6 @@ LL alphaBeta(int depth, LL alpha, LL beta, int player, Point p) {
     return alpha;
 }
 
-//启发式搜索
-int inspireFind(Move* scoreBoard, int player) {
-    int length = 0;
-    for (int i = 0; i < SIZEE; i++) {
-        for (int j = 0; j < SIZEE; j++) {
-            if (innerBoard[i][j] == 0) {
-                Point p = { i, j };
-                if (hasNeighbor(p)) {
-                    scoreBoard[length].score = singleScore(p, player);//我方适合进攻的点
-                    scoreBoard[length++].p = p;
-                }
-            }
-        }
-    }
-    shellSort(scoreBoard, length);
-    return length;
-}
-
-
-void shellSort(Move* s, int len) {
-    int i, j, gap;
-    Move tep;
-    for (gap = len / 2; gap > 0; gap /= 2) {
-        for (i = gap; i < len; i += 1) {
-            for (j = i - gap; j >= 0 && s[j].score < s[j + gap].score; j -= gap) {
-                tep = s[j + gap];
-                s[j + gap] = s[j];
-                s[j] = tep;
-            }
-        }
-    }
-}
-
 //算杀采取双方分开的写法 因此每个函数都有一个对称函数
 int killSearch(void) {
     int depth = KILLDEPTH;
@@ -213,5 +180,37 @@ int findHumKill(Move* move) {
         }
     }
     shellSort(move, length);
+    return length;
+}
+
+void shellSort(Move* s, int len) {
+    int i, j, gap;
+    Move tep;
+    for (gap = len / 2; gap > 0; gap /= 2) {
+        for (i = gap; i < len; i += 1) {
+            for (j = i - gap; j >= 0 && s[j].score < s[j + gap].score; j -= gap) {
+                tep = s[j + gap];
+                s[j + gap] = s[j];
+                s[j] = tep;
+            }
+        }
+    }
+}
+
+//启发式搜索
+int inspireFind(Move* scoreBoard, int player) {
+    int length = 0;
+    for (int i = 0; i < SIZEE; i++) {
+        for (int j = 0; j < SIZEE; j++) {
+            if (innerBoard[i][j] == 0) {
+                Point p = { i, j };
+                if (hasNeighbor(p)) {
+                    scoreBoard[length].score = singleScore(p, player);//我方适合进攻的点
+                    scoreBoard[length++].p = p;
+                }
+            }
+        }
+    }
+    shellSort(scoreBoard, length);
     return length;
 }
