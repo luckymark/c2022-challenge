@@ -84,32 +84,6 @@ LL wholeScore(int player) {
     return ownScore - oppoScore;
 }
 
-//获取p点周围的棋型
-Type getType(struct Point p, int player) {
-    Type tep = { 0 };
-    for (int i = 0; i < 4; i++) {
-        Type type[4];
-        int length, left[4], right[4];
-        length = Length(p, i, left, right, player);
-        type[i] = typeAnalysis(length, left, right, player);
-        tep.more += type[i].more;
-        tep.win5 += type[i].win5;
-        tep.alive4 += type[i].alive4;
-        tep.sleepy4 += type[i].sleepy4;
-        tep.dead4 += type[i].dead4;
-        tep.alive3 += type[i].alive3;
-        tep.sleepy3 += type[i].sleepy3;
-        tep.dead3 += type[i].dead3;
-        tep.alive2 += type[i].alive2;
-        tep.sleepy2 += type[i].sleepy2;
-        tep.dead2 += type[i].dead2;
-        tep.alive1 += type[i].alive1;
-        tep.sleepy1 += type[i].sleepy1;
-        tep.dead1 += type[i].dead1;
-    }
-    return tep;
-}
-
 //获取p点连子的长度和两边延伸4子的信息
 int Length(Point p, int d, int* left, int* right, int player)
 {
@@ -134,6 +108,32 @@ int Length(Point p, int d, int* left, int* right, int player)
         }
     }
     return shu;
+}
+
+//获取p点周围的棋型
+Type getType(struct Point p, int player) {
+    Type tep = { 0 };
+    for (int i = 0; i < 4; i++) {
+        Type type[4];
+        int length, left[4], right[4];
+        length = Length(p, i, left, right, player);
+        type[i] = typeAnalysis(length, left, right, player);
+        tep.more += type[i].more;
+        tep.win5 += type[i].win5;
+        tep.alive4 += type[i].alive4;
+        tep.sleepy4 += type[i].sleepy4;
+        tep.dead4 += type[i].dead4;
+        tep.alive3 += type[i].alive3;
+        tep.sleepy3 += type[i].sleepy3;
+        tep.dead3 += type[i].dead3;
+        tep.alive2 += type[i].alive2;
+        tep.sleepy2 += type[i].sleepy2;
+        tep.dead2 += type[i].dead2;
+        tep.alive1 += type[i].alive1;
+        tep.sleepy1 += type[i].sleepy1;
+        tep.dead1 += type[i].dead1;
+    }
+    return tep;
 }
 
 Type typeAnalysis(int length, int* left, int* right, int player)
