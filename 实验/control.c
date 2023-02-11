@@ -7,6 +7,13 @@ Point lp;
 int step = 0;
 int Cancel = 0;
 
+int inSide(struct Point p) {
+    if (p.x >= 0 && p.x < SIZEE && p.y >= 0 && p.y < SIZEE)
+        return 1;
+    else
+        return 0;
+}
+
 void Player(void)
 {
     step = 0;
@@ -19,7 +26,7 @@ be:    while (1)
         if (Mouse.uMsg == WM_LBUTTONDOWN)
         {
             if (regret(lp, Mouse.x, Mouse.y) == 1) {
-                reinit();
+                reinit(p);
                 goto be;
             }
             for (int a = 0; a < 16; a++)
@@ -34,7 +41,7 @@ be:    while (1)
                         lp = p;
                         if (innerBoard[a][b] == 0) {
                             innerBoard[a][b] = id;
-                            displayBoard();
+                            displayBoard(p);
                             step = 1;
                             goto ha;
                         }
@@ -47,17 +54,76 @@ be:    while (1)
     }
 ha:       id = opp(id);
     gameover = JudgeFive(p.x, p.y) * id;
-
 }
 
 int regret(Point p,int x, int y) {
     if (x <= 570 && x >= 470 && y >= 200 && y <= 250) {
         innerBoard[lp.x][lp.y] = 0;
         innerBoard[aix][aiy] = 0;
-        displayBoard();
+        displayBoard(p);
         return 1;
     }
     else return 0;
+}
+
+void Computer(void)
+{
+    int kill = 0;
+    if (num == 0) {
+        aix = 7;
+        aiy = 7;
+    }
+    else {
+        kill = killSearch();
+        if (!kill) {//算杀失败 采取极大极小搜索
+            minmax(DEPTH, TOTALMIN, TOTALMAX, id);
+        }
+    }
+    Point p = { aix,aiy };
+    put(p, id);
+    gameover = JudgeFive(aix, aiy) * id;
+    displayBoard(p);
+    id = opp(id);
+    step = 0;
+}
+
+void put(struct Point p, int player) {
+    innerBoard[p.x][p.y] = player;
+    num++;
+}
+
+void unPut(Point p) {
+    innerBoard[p.x][p.y] = 0;
+    num--;
+}
+
+int opp(int player) {
+    return (player == 1) ? 2 : 1;
+}
+
+int JudgeFive(int x, int y)
+{
+    int i, j, k;
+    const int direction[4][2] = { {1,0},{0,1},{1,1},{1,-1} };
+    for (i = 0; i < 4; ++i)
+    {
+        const int d[2] = { -1,1 };//表示左右两个方向
+        int shu = 1;
+        for (j = 0; j < 2; ++j) {
+            for (k = 1; k <= 4; ++k) {
+                int row = x + k * d[j] * direction[i][0];
+                int col = y + k * d[j] * direction[i][1];
+                if (row >= 0 && row < SIZEE && col >= 0 && col < SIZEE &&
+                    innerBoard[x][y] == innerBoard[row][col])
+                    shu++;
+                else
+                    break;
+            }
+        }
+        if (shu >= 5)
+            return 1;
+    }
+    return 0;
 }
 
 void menu()
@@ -104,75 +170,6 @@ void menu()
     default:
         break;
     }
-
-}
-
-int inSide(struct Point p) {
-    if (p.x >= 0 && p.x < SIZEE && p.y >= 0 && p.y < SIZEE)
-        return 1;
-    else
-        return 0;
-}
-
-void put(struct Point p, int player) {
-    innerBoard[p.x][p.y] = player;
-    num++;
-}
-
-void unPut(Point p) {
-    innerBoard[p.x][p.y] = 0;
-    num--;
-}
-
-//电脑回合
-void Computer(void)
-{
-    int kill = 0;
-    if (num == 0) {
-        aix = 7;
-        aiy = 7;
-    }
-    else {
-        kill = killSearch();
-        if (!kill) {//算杀失败 采取极大极小搜索
-            minmax(DEPTH, TOTALMIN, TOTALMAX, id);
-        }
-    }
-    Point p = { aix,aiy };
-    put(p, id);
-    gameover = JudgeFive(aix, aiy) * id;
-    displayBoard();
-    id = opp(id);
-    step = 0;
-}
-
-int opp(int player) {
-    return (player == 1) ? 2 : 1;
-}
-
-int JudgeFive(int x, int y)
-{
-    int i, j, k;
-    const int direction[4][2] = { {1,0},{0,1},{1,1},{1,-1} };
-    for (i = 0; i < 4; ++i)
-    {
-        const int d[2] = { -1,1 };//表示左右两个方向
-        int shu = 1;
-        for (j = 0; j < 2; ++j) {
-            for (k = 1; k <= 4; ++k) {
-                int row = x + k * d[j] * direction[i][0];
-                int col = y + k * d[j] * direction[i][1];
-                if (row >= 0 && row < SIZEE && col >= 0 && col < SIZEE &&
-                    innerBoard[x][y] == innerBoard[row][col])
-                    shu++;
-                else
-                    break;
-            }
-        }
-        if (shu >= 5)
-            return 1;
-    }
-    return 0;
 }
 
 int JudgeDisplay(void)
