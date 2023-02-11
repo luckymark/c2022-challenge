@@ -5,19 +5,23 @@ int gameover = 0;
 int id = 1;
 Point lp;
 int step = 0;
+int Cancel = 0;
 
 void Player(void)
 {
     step = 0;
     MOUSEMSG Mouse;
     Point p = { -1,-1 };
-    Point lp;
-    while (1)
+be:    while (1)
     {
         MOUSEMSG GetMouseMsg();
         Mouse = GetMouseMsg();
         if (Mouse.uMsg == WM_LBUTTONDOWN)
         {
+            if (regret(lp, Mouse.x, Mouse.y) == 1) {
+                reinit();
+                goto be;
+            }
             for (int a = 0; a < 16; a++)
             {
                 for (int b = 0; b < 16; b++)
@@ -26,8 +30,8 @@ void Player(void)
                     {
                         Mouse.x = a * 30;
                         Mouse.y = b * 30;
-                        lp = p;
                         p.x = a, p.y = b;
+                        lp = p;
                         if (innerBoard[a][b] == 0) {
                             innerBoard[a][b] = id;
                             displayBoard();
@@ -44,6 +48,16 @@ void Player(void)
 ha:       id = opp(id);
     gameover = JudgeFive(p.x, p.y) * id;
 
+}
+
+int regret(Point p,int x, int y) {
+    if (x <= 570 && x >= 470 && y >= 200 && y <= 250) {
+        innerBoard[lp.x][lp.y] = 0;
+        innerBoard[aix][aiy] = 0;
+        displayBoard();
+        return 1;
+    }
+    else return 0;
 }
 
 void menu()
@@ -87,7 +101,7 @@ void menu()
                 break;
             }
         }break;
-    default: 
+    default:
         break;
     }
 
