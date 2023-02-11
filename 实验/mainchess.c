@@ -2,7 +2,7 @@
 int innerBoard[15][15] = { 0 };
 HWND hwnd;   
 
-void displayBoard();
+void displayBoard(Point p);
 void initBoard();
 void regretButton(int x, int y, int w, int h, TCHAR* text)
 {
@@ -68,7 +68,14 @@ void initBoard()
 	hwnd = GetHWnd();
 	
 }
-void displayBoard()
+
+void mention(Point p)
+{
+	setfillcolor(GREEN);
+	solidcircle(p.x*30, p.y*30, 3);
+}
+
+void displayBoard(Point p)
 {
 	for (int i = 0; i < 15; i++) {
 		for (int j = 0; j < 15; j++) {
@@ -80,13 +87,14 @@ void displayBoard()
 				setfillcolor(WHITE);
 				solidcircle(i * 30, j * 30, 10);
 			}
-			
 		}
 	}
+	mention(p);
 }
-void reinit()
+
+void reinit(Point p)
 {
 	cleardevice();
 	initBoard();
-	displayBoard();
+	displayBoard(p);
 }
