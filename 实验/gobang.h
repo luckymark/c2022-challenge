@@ -44,9 +44,12 @@ extern int innerBoard[SIZEE][SIZEE];
 extern int id;
 extern int num;
 extern int aix, aiy;
+extern int Cancel;
 
+int regret(Point p, int x, int y);
 void displayBoard();
 void menu(void);
+void reinit();
 
 void put(Point p, int player);
 void unPut(Point p);
