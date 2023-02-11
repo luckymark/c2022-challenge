@@ -170,12 +170,12 @@ int JudgeDisplay(void)
     }
     if (gameover == 1)
     {
-        MessageBox(NULL, "白棋获胜！", "GAMEOVER", MB_OK);
+        MessageBox(NULL, "黑棋获胜！", "GAMEOVER", MB_OK);
         return 1;
     }
     if (gameover == 2)
     {
-        MessageBox(NULL, "黑棋获胜！", "GAMEOVER", MB_OK);
+        MessageBox(NULL, "白棋获胜！", "GAMEOVER", MB_OK);
         return 1;
     }
     return 0;
