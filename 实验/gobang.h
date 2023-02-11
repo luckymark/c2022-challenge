@@ -10,7 +10,7 @@
 #define TOTALMAX 100000000000000
 
 #define KILLDEPTH 12 //算杀深度
-#define DEPTH 4 //深度
+#define DEPTH 6 //深度
 
 
 typedef long long LL;
