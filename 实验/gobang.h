@@ -47,9 +47,9 @@ extern int aix, aiy;
 extern int Cancel;
 
 int regret(Point p, int x, int y);
-void displayBoard();
+void displayBoard(Point p);
 void menu(void);
-void reinit();
+void reinit(Point p);
 
 void put(Point p, int player);
 void unPut(Point p);
