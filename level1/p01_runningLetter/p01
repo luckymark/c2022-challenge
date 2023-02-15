@@ -1,0 +1,28 @@
+### 题目：奔跑的字母
+
+### 功能要求：
+
+1. 在console上输出一个字母（或单词）
+1. 使该字母或单词，按一定速度从左至右运动
+1. 当遇到屏幕边界时反向运动
+
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main(void) {
+    int flag = 1,cur = 0;
+    while (1) {
+        cur += flag;
+        if (cur == 0||cur == 118){
+            flag = -flag;
+        }
+        for (int i = 1; i <= cur;i++) {
+            putchar(' ');
+        }
+        putchar('q');
+        system("cls");
+    }
+    return 0;
+}
+

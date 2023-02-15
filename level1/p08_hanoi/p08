@@ -10,3 +10,21 @@
     A -> C
     B -> C
     ...
+    
+    #include <stdio.h>
+void function(char tar1,char tar2,char tar3,int num);
+int main() {
+    printf("现有A,B,C根柱子，目标：将A上64张盘子放到B上，下为方法：\n");
+    function('A','B','c',64);
+    return 0;
+}
+void function(char tar1,char tar2,char tar3,int num) {//将tar1上的num个盘子移到tar2上
+    if (num == 1) {
+        printf("%c -> %c ",tar1,tar2);
+    }else{
+        function(tar1,tar3,tar2,num-1);
+        printf("%c -> %c ",tar1,tar2);
+        function(tar3,tar2,tar1,num-1);
+    }
+    return;
+}
