@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="源文件\AI">
+      <UniqueIdentifier>{d3532154-d88c-474d-8aed-a2b7017b84c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UI">
+      <UniqueIdentifier>{35311537-5222-4c9f-89f3-82215b0dba62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\TheMove">
+      <UniqueIdentifier>{1eaee369-3b4f-485f-8c08-8ec592b4f9a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Valuation">
+      <UniqueIdentifier>{3fd69f74-516b-49b2-8ec7-95e9b0eea033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\init">
+      <UniqueIdentifier>{04f91f88-ea13-4998-99d5-415df8434072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\废案">
+      <UniqueIdentifier>{720f706b-92db-459c-af99-6870b5b90ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\UI\UI_aux">
+      <UniqueIdentifier>{259c38f9-28c7-48af-9bda-0a5fd714317a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Repentance">
+      <UniqueIdentifier>{e039e6cf-964e-4c7b-ba96-eb395817193e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Repentance\Pepentance_aux">
+      <UniqueIdentifier>{ed5a7004-2be6-4e45-805d-01eb254de9fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\TheJudge">
+      <UniqueIdentifier>{78028671-11f9-45b0-b101-4c22d7c5de3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\Chess_type">
+      <UniqueIdentifier>{57ba7cdf-7c68-43f2-a324-78a753d7abca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="wuziqi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="UI.cpp">
+      <Filter>源文件\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Move.cpp">
+      <Filter>源文件\TheMove</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerMove.cpp">
+      <Filter>源文件\TheMove</Filter>
+    </ClCompile>
+    <ClCompile Include="Settled_Situation.cpp">
+      <Filter>源文件\Valuation</Filter>
+    </ClCompile>
+    <ClCompile Include="min_max_dfs.cpp">
+      <Filter>源文件\Valuation</Filter>
+    </ClCompile>
+    <ClCompile Include="Location_pruning.cpp">
+      <Filter>源文件\Valuation</Filter>
+    </ClCompile>
+    <ClCompile Include="Chess_Repentance.cpp">
+      <Filter>源文件\Repentance</Filter>
+    </ClCompile>
+    <ClCompile Include="InitBoard.cpp">
+      <Filter>源文件\init</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件\init</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>源文件\init</Filter>
+    </ClCompile>
+    <ClCompile Include="SituationValuation.cpp">
+      <Filter>源文件\Valuation</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonClick.cpp">
+      <Filter>源文件\UI\UI_aux</Filter>
+    </ClCompile>
+    <ClCompile Include="countstep.cpp">
+      <Filter>源文件\UI\UI_aux</Filter>
+    </ClCompile>
+    <ClCompile Include="stack.cpp">
+      <Filter>源文件\Repentance\Pepentance_aux</Filter>
+    </ClCompile>
+    <ClCompile Include="Judge.cpp">
+      <Filter>源文件\TheJudge</Filter>
+    </ClCompile>
+    <ClCompile Include="check.cpp">
+      <Filter>源文件\TheJudge</Filter>
+    </ClCompile>
+    <ClCompile Include="defend.cpp">
+      <Filter>源文件\TheJudge</Filter>
+    </ClCompile>
+    <ClCompile Include="kill.cpp">
+      <Filter>源文件\TheJudge</Filter>
+    </ClCompile>
+    <ClCompile Include="forbidden.cpp">
+      <Filter>源文件\TheJudge</Filter>
+    </ClCompile>
+    <ClCompile Include="Chess_type.cpp">
+      <Filter>源文件\Chess_type</Filter>
+    </ClCompile>
+    <ClCompile Include="Opposite_shore.cpp">
+      <Filter>源文件\Chess_type</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
+      <Filter>源文件\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="set.cpp">
+      <Filter>源文件\TheMove</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
