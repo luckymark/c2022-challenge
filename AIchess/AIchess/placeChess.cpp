@@ -30,8 +30,8 @@ void drawChessboard()
 	int i;
 	for (i = 0; i < N; i++)//画线
 	{
-		line(1 + i * gridwid, 1, 1 + i * gridwid, gridwid * (N - 1));
-		line(1, 1 + i * gridwid, gridwid * (N - 1), 1 + i * gridwid);
+		line(1 + i * g_wid, 1, 1 + i * g_wid, g_wid * (N - 1));
+		line(1, 1 + i * g_wid, g_wid * (N - 1), 1 + i * g_wid);
 	}
 }
 
@@ -427,7 +427,7 @@ int judgeScore(int x, int y, int p)//坐标，玩家
 
 int coordinate(int x)
 {
-	int coo = int((double)x / gridwid + 0.5);
+	int coo = int((double)x / g_wid + 0.5);
 	if (coo > 0 && coo < N)
 	{
 		return coo;
@@ -452,7 +452,7 @@ int placePieces(int x, int y)//落子
 	{
 		chess[x][y] = player;
 		chessNum++;
-		solidcircle(x * gridwid, y * gridwid, Chess_R);
+		solidcircle(x * g_wid, y * g_wid, Chess_R);
 		if (judgeWin(x, y))
 		{
 			judgeRestart(1);
