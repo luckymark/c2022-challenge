@@ -1,4 +1,4 @@
-#include"gobang_AI.h"
+#include"gobang_AI.h"//AI.c
 
 //flex4 needs 6 point
 int type[4][4][4][4][4][4];//0 '_',1 '0',2 'X',3 '#'
@@ -14,36 +14,44 @@ int worth[16][16];
 
 int ifWin(void) {
     int flag = 0, i = 1, j = 1;
-    for (i=1; i <= 15; ++i) {
-        for (j=1; j <= 15; ++j) {
+    for (i = 1; i <= 15; ++i) {
+        for (j = 1; j <= 15; ++j) {
             if (Board[i][j] == 1) { ++flag; }
             else { flag = 0; }
             if (flag == 5)
-            { return 1; }
+            {
+                return 1;
+            }
         }
     }
-    for (i=1; i <= 15; ++i) {
-        for (j=1; j <= 15; ++j) {
+    for (i = 1; i <= 15; ++i) {
+        for (j = 1; j <= 15; ++j) {
             if (Board[i][j] == 2) { ++flag; }
             else { flag = 0; }
             if (flag == 5)
-            { return 2; }
+            {
+                return 2;
+            }
         }
     }
-    for (i=1; i <= 15; ++i) {
-        for (j=1; j <= 15; ++j) {
+    for (i = 1; i <= 15; ++i) {
+        for (j = 1; j <= 15; ++j) {
             if (Board[j][i] == 1) { ++flag; }
             else { flag = 0; }
             if (flag == 5)
-            { return 1; }
+            {
+                return 1;
+            }
         }
     }
-    for (i=1; i <= 15; ++i) {
-        for (j=1; j <= 15; ++j) {
+    for (i = 1; i <= 15; ++i) {
+        for (j = 1; j <= 15; ++j) {
             if (Board[j][i] == 2) { ++flag; }
             else { flag = 0; }
-            if (flag == 5) 
-            { return 2; }
+            if (flag == 5)
+            {
+                return 2;
+            }
         }
     }
     for (int a = 11; a >= 1; --a) {
@@ -53,18 +61,22 @@ int ifWin(void) {
             else { flag = 0; }
             ++i; --j;//
             if (flag == 5)
-            { return 1; }
+            {
+                return 1;
+            }
         }
     }
     for (int b = 14; b >= 5; --b) {
-        i = 1; 
+        i = 1;
         j = b;
         while (i <= 15 && j >= 1) {
             if (Board[i][j] == 1) { ++flag; }
             else { flag = 0; }
             ++i; --j;//
             if (flag == 5)
-            { return 1; }
+            {
+                return 1;
+            }
         }
     }
 
@@ -75,7 +87,9 @@ int ifWin(void) {
             else { flag = 0; }
             ++i; --j;//
             if (flag == 5)
-            { return 2; }
+            {
+                return 2;
+            }
         }
     }
     for (int b = 14; b >= 5; --b) {
@@ -86,7 +100,9 @@ int ifWin(void) {
             else { flag = 0; }
             ++i; --j;//
             if (flag == 5)
-            { return 2; }
+            {
+                return 2;
+            }
         }
     }
 
@@ -97,19 +113,23 @@ int ifWin(void) {
             if (Board[i][j] == 1) { ++flag; }
             else { flag = 0; }
             ++i; ++j;//
-            if (flag == 5) 
-            { return 1; }
+            if (flag == 5)
+            {
+                return 1;
+            }
         }
     }
     for (int b = 2; b <= 11; ++b) {
-        i = 1; 
+        i = 1;
         j = b;
         while (i <= 15 && j <= 15) {
             if (Board[i][j] == 1) { ++flag; }
             else { flag = 0; }
             ++i; ++j;
-            if (flag == 5) 
-            { return 1; }
+            if (flag == 5)
+            {
+                return 1;
+            }
         }
     }
 
@@ -121,7 +141,9 @@ int ifWin(void) {
             else { flag = 0; }
             ++i; ++j;//
             if (flag == 5)
-            { return 2; }
+            {
+                return 2;
+            }
         }
     }
     for (int b = 2; b <= 11; ++b) {
@@ -132,14 +154,16 @@ int ifWin(void) {
             else { flag = 0; }
             ++i; ++j;
             if (flag == 5)
-            { return 2; }
+            {
+                return 2;
+            }
         }
     }
     return 0;
 }
 void init6type(void) {
-    for (int i = 0; i <= 16; ++i) { Board[i][0] = 3; Board[i][16] = 3;}
-    for (int i = 1; i <= 15; ++i) { Board[0][i] = 3; Board[16][i] = 3;}
+    for (int i = 0; i <= 16; ++i) { Board[i][0] = 3; Board[i][16] = 3; }
+    for (int i = 1; i <= 15; ++i) { Board[0][i] = 3; Board[16][i] = 3; }
     memset(type, 0, sizeof(type));
 
     type[2][2][2][2][2][2] = WIN;
@@ -196,7 +220,8 @@ void init6type(void) {
     type[0][0][0][1][0][0] = flex1;
     type[0][0][0][0][1][0] = flex1;
 
-    int p1, p2, p3, p4, p5, p6, x, y, ix, iy;//x:左5中'0'个数,y:左5中'X'个数,ix:右5中'0'个数,iy:右5中'X'个数
+    int p1, p2, p3, p4, p5, p6, x, y, ix, iy;
+    //x:左5中'0'个数,y:左5中'X'个数,ix:右5中'0'个数,iy:右5中'X'个数
     for (p1 = 0; p1 <= 3; ++p1) {
         for (p2 = 0; p2 <= 2; ++p2) {
             for (p3 = 0; p3 <= 2; ++p3) {
@@ -223,54 +248,54 @@ void init6type(void) {
                             if (p6 == 1) { ++ix; }
                             else if (p6 == 2) { ++iy; }
 
-                           
+
                             if ((p1 == 3 && p6 != 3) || (p1 != 3 && p6 == 3)) {//有边界  
 
-                                    if (ix == 0 && iy == 4) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = BLOCK4;
-                                        }
+                                if (ix == 0 && iy == 4) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = BLOCK4;
                                     }
+                                }
 
-                                    if (ix == 4 && iy == 0) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = block4;
-                                        }
+                                if (ix == 4 && iy == 0) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = block4;
                                     }
+                                }
 
-                                    if (ix == 0 && iy == 3) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = BLOCK3;
-                                        }
+                                if (ix == 0 && iy == 3) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = BLOCK3;
                                     }
+                                }
 
-                                    if (ix == 3 && iy == 0) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = block3;
-                                        }
+                                if (ix == 3 && iy == 0) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = block3;
                                     }
+                                }
 
-                                    if (ix == 0 && iy == 2) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = BLOCK2;
-                                        }
+                                if (ix == 0 && iy == 2) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = BLOCK2;
                                     }
+                                }
 
-                                    if (ix == 2 && iy == 0) {
-                                        if (type[p1][p2][p3][p4][p5][p6] == 0)
-                                        {
-                                            type[p1][p2][p3][p4][p5][p6] = block2;
-                                        }
+                                if (ix == 2 && iy == 0) {
+                                    if (type[p1][p2][p3][p4][p5][p6] == 0)
+                                    {
+                                        type[p1][p2][p3][p4][p5][p6] = block2;
                                     }
+                                }
                             }
-                              
-                            
-                            else if(p1!=3&&p6!=3) {//无边界
+
+
+                            else if (p1 != 3 && p6 != 3) {//无边界
                                 if ((x == 0 && y == 4) || (ix == 0 && iy == 4)) {
                                     if (type[p1][p2][p3][p4][p5][p6] == 0)
                                         type[p1][p2][p3][p4][p5][p6] = BLOCK4;
@@ -359,7 +384,8 @@ void seekPoints(int blackORwhite) {
     memset(best_points.score, 0, sizeof(best_points.score));
 
     int num = 3;
-    for (int i = 1; i <= 15; ++i) {//每个非空点附近8个方向延伸3个深度,若不越界则标记为可走
+    for (int i = 1; i <= 15; ++i) {
+        //每个非空点附近8个方向延伸3个深度,若不越界则标记为可走
         for (int j = 1; j <= 15; ++j) {
             if (Board[i][j] != 0) {
                 for (int k = -num; k <= num; ++k) {
@@ -376,10 +402,10 @@ void seekPoints(int blackORwhite) {
 
     for (int i = 1; i <= 15; ++i) {
         for (int j = 1; j <= 15; ++j) {
-            if (blackORwhite == 2){worth[i][j] = -INT_MAX;}
-            else if(blackORwhite==1) { worth[i][j] = INT_MAX; }
-            if (Board[i][j] == 0&& isEmpty[i][j] == 1) {
-                Board[i][j] = blackORwhite; 
+            if (blackORwhite == 2) { worth[i][j] = -INT_MAX; }
+            else if (blackORwhite == 1) { worth[i][j] = INT_MAX; }
+            if (Board[i][j] == 0 && isEmpty[i][j] == 1) {
+                Board[i][j] = blackORwhite;
                 worth[i][j] = evaluate();
                 Board[i][j] = 0;
             }
@@ -388,9 +414,11 @@ void seekPoints(int blackORwhite) {
 
     int goal;
     for (int k = 1; k <= 10; ++k) {
-        if(blackORwhite==2) 
-        { goal = -INT_MAX; }
-        else if (blackORwhite == 1) {goal=INT_MAX;}
+        if (blackORwhite == 2)
+        {
+            goal = -INT_MAX;
+        }
+        else if (blackORwhite == 1) { goal = INT_MAX; }
         for (int i = 1; i <= 15; ++i) {
             for (int j = 1; j <= 15; ++j) {
                 if (blackORwhite == 2) {
@@ -400,7 +428,7 @@ void seekPoints(int blackORwhite) {
                         best_points.y[k] = j;
                     }
                 }
-                else if(blackORwhite==1) {
+                else if (blackORwhite == 1) {
                     if (worth[i][j] < goal) {
                         goal = worth[i][j];
                         best_points.x[k] = i;
@@ -413,8 +441,10 @@ void seekPoints(int blackORwhite) {
         if (blackORwhite == 2) {
             worth[best_points.x[k]][best_points.y[k]] = -INT_MAX;
         }
-        else if(blackORwhite==1) 
-        { worth[best_points.x[k]][best_points.y[k]] = INT_MAX; }
+        else if (blackORwhite == 1)
+        {
+            worth[best_points.x[k]][best_points.y[k]] = INT_MAX;
+        }
         //清除掉上一点,计算下一点的位置和分数
     }
 }
@@ -445,8 +475,10 @@ int analyse(int depth, int alpha, int beta, int Depth) {//alpha max beta -max
             if (temp > alpha) {
                 alpha = temp;
             }
-            if (temp<alpha&&depth!=Depth)
-            { break; }
+            if (temp < alpha && depth != Depth)
+            {
+                break;
+            }
         }
         return alpha;
     }
@@ -458,9 +490,11 @@ int analyse(int depth, int alpha, int beta, int Depth) {//alpha max beta -max
             temp = analyse(depth - 1, alpha, beta, Depth);
             Board[tempX][tempY] = 0;
             if (temp < beta) { beta = temp; }
-            if (beta <temp) 
-            { break; }
+            if (beta < temp)
+            {
+                break;
+            }
         }
         return beta;
     }
-}
+}//AI.c
