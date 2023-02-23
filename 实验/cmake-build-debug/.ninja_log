@@ -1,0 +1,20 @@
+# ninja log v5
+3	976	6985181111758807	CMakeFiles/NewWuZiQi.dir/main.cpp.obj	dd85e358d6e85344
+11	1027	6985181112177789	CMakeFiles/NewWuZiQi.dir/Game_Start.cpp.obj	8ae3a3cd78159c36
+1	336	6985182035181270	build.ninja	a15ab46d5f2ce5cd
+3	760	6971834111788456	CMakeFiles/NewWuZiQi.dir/Conduct.cpp.obj	74307da5cca2c43f
+1151	1307	6985181115019362	NewWuZiQi.exe	c13aaf8865bf5ee1
+10	821	6967665709018329	CMakeFiles/NewWuZiQi.dir/Chess_Data.cpp.obj	60b11053ec5d3cde
+7	811	6985181110112329	CMakeFiles/NewWuZiQi.dir/GoPng.cpp.obj	18575b1afc6ce9a2
+1	56	6972752308582194	CMakeFiles/NewWuZiQi.dir/Pratice.c.obj	86684004eff4a79e
+14	1100	6985181112991094	CMakeFiles/NewWuZiQi.dir/min_max.cpp.obj	c8dd734b425fc338
+6	1400	6985095063635378	CMakeFiles/NewWuZiQi.dir/intereact.cpp.obj	3572a6dace330495
+17	1151	6985181113501655	CMakeFiles/NewWuZiQi.dir/myscore.cpp.obj	18eee5845e7587a
+7	944	6985182709842384	CMakeFiles/NewWuZiQi.dir/GoPng.cpp.obj	18575b1afc6ce9a2
+2	1091	6985182711321817	CMakeFiles/NewWuZiQi.dir/main.cpp.obj	dd85e358d6e85344
+11	1170	6985182712113248	CMakeFiles/NewWuZiQi.dir/Game_Start.cpp.obj	8ae3a3cd78159c36
+18	1212	6985182712535276	CMakeFiles/NewWuZiQi.dir/min_max.cpp.obj	c8dd734b425fc338
+15	1274	6985182713154544	CMakeFiles/NewWuZiQi.dir/myscore.cpp.obj	18eee5845e7587a
+1274	1418	6985182714567411	NewWuZiQi.exe	c13aaf8865bf5ee1
+2	1044	6985185136258159	CMakeFiles/NewWuZiQi.dir/myscore.cpp.obj	18eee5845e7587a
+1044	1251	6985185138208219	NewWuZiQi.exe	c13aaf8865bf5ee1
