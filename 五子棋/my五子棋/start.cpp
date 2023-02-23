@@ -16,7 +16,7 @@ void gameStart()
 	setlinecolor(RGB(0, 0, 0));
 	rectangle(75, 500, 475, 600);
 	rectangle(525, 500, 925, 600);
-	loadimage(&img, "C:\\Users\\谭浩翔\\Desktop\\visual studio\\my五子棋\\sta.png",320,320);
+	loadimage(&img, "C:\\Users\\谭浩翔\\c2022-challenge\\五子棋\\sta.png",320,320);
 	putimage(300, 150, &img);
 	//setfillcolor(BLUE);
 	//cleardevice();

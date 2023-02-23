@@ -1,8 +1,8 @@
 #include"chess.h"
 
-void init()
+void init()//画出游戏窗口及功能。
 {
-	initgraph(700, 800,EW_SHOWCONSOLE);//创建游戏窗口。
+	initgraph(700, 800);//创建游戏窗口。
 	setbkcolor(RGB(170, 243, 255));
 	cleardevice();
 	setlinecolor(RGB(0, 0, 0));
@@ -18,28 +18,32 @@ void init()
 	rectangle(400, 700, 650, 750);
 	rectangle(240, 695, 375, 750);
 	outtextxy(250, 700, TEXT("悔棋"));
+	//初始化棋盘。
 	for (int i = 0; i <= gradeSize; ++i) {
 		for (int j = 0; j <= gradeSize; ++j) {
 			chessMap[i][j] = 0;
 		}
 	}
+	//初始化走的步。
 	for (int i = 0; i < 226; ++i) {
 		chessPos[i].x = 0;
 		chessPos[i].y = 0;
 	}
-	playerFlag = false;
+	playerFlag = true;//黑棋先行
 	stepNum = 0;
 }
 
+//函数功能：检查是否为有效点击，是则控制下棋
 bool clickBoard(int x, int y, ChessPos* pos)
 {
 	int col = (x - margin_x) / chessSize;//列
 	int row = (y - margin_y) / chessSize;//行
+	//计算离鼠标点击位置最近的左上方点的位置
 	int leftTopPosX = margin_x + col * chessSize;
 	int leftTopPosY = margin_y + row * chessSize;
 	int offset = chessSize / 2;
 	int len;
-	bool ret = false;
+	bool ret = false;//bool变量判断是否为有效点击，有效则退出函数
 	do {
 		if (x <= 35 || x >= 640 || y <= 35 || y >= 640) {
 			break;
@@ -51,7 +55,6 @@ bool clickBoard(int x, int y, ChessPos* pos)
 			pos->y = row;
 			if (chessMap[pos->y][pos->x] == 0) {
 				ret = true;
-				//printf("%d   %d\n", pos->y, pos->x);
 			}
 			break;
 		}
@@ -64,7 +67,6 @@ bool clickBoard(int x, int y, ChessPos* pos)
 			pos->y = row;
 			if (chessMap[pos->y][pos->x] == 0) {
 				ret = true;
-				//printf("%d   %d\n", pos->y, pos->x);
 			}
 			break;
 		}
@@ -77,7 +79,6 @@ bool clickBoard(int x, int y, ChessPos* pos)
 			pos->y = row + 1;
 			if (chessMap[pos->y][pos->x] == 0) {
 				ret = true;
-				//printf("%d   %d\n", pos->y, pos->x);
 			}
 			break;
 		}
@@ -90,7 +91,6 @@ bool clickBoard(int x, int y, ChessPos* pos)
 			pos->y = row + 1;
 			if (chessMap[pos->y][pos->x] == 0) {
 				ret = true;
-				//printf("%d   %d\n", pos->y, pos->x);
 			}
 			break;
 		}
@@ -98,11 +98,12 @@ bool clickBoard(int x, int y, ChessPos* pos)
 	return ret;
 }
 
+//函数功能：实现落子
 void chessDown(ChessPos* pos)
 {
 	int x = margin_x + chessSize * pos->x;
 	int y = margin_y + chessSize * pos->y;
-	
+
 	if (playerFlag == true) {
 		setfillcolor(BLACK);
 	}
@@ -110,35 +111,26 @@ void chessDown(ChessPos* pos)
 		setfillcolor(WHITE);
 	}
 	fillcircle(x, y, chessSize / 2);
+
+	//更新图
 	updateMap(pos);
-	updateGameMap(pos);
-	printf("%d  %d\n", chessPos[stepNum].x, chessPos[stepNum].y);
 }
 
-int getChessData(ChessPos* pos)
-{
-	return chessMap[pos->y][pos->x];
-}
-
-int getChessData(int x, int y)
-{
-	return chessMap[y][x];
-}
-
+//函数功能：处理结束之后的文字输出
 bool checkOver()
 {
 	if (checkWin()) {
-		settextstyle(50, 30, _T("楷体"));
+		settextstyle(50, 25, _T("楷体"));
 		if (playType == true) {
 			if (playerFlag == false) {
-				outtextxy(50, 700, TEXT("黑子赢了"));
+				outtextxy(20, 700, TEXT("黑子赢了"));
 			}
 			else {
-				outtextxy(50, 700, TEXT("白子赢了"));
+				outtextxy(20, 700, TEXT("白子赢了"));
 			}
 		}
 		else {
-			if (playerFlag == false) {
+			if (playerFlag == true) {
 				outtextxy(50, 700, TEXT("你输了"));
 			}
 			else {
@@ -150,13 +142,18 @@ bool checkOver()
 	return false;
 }
 
+//函数功能：判断棋局是否结束
 bool checkWin()
 {
+	//每下一步就判断一次，故只需考虑最后一次落子其八个方向是否有连成五子
 	int x = chessPos[stepNum].x;
 	int y = chessPos[stepNum].y;
+
 	int chessNum = 1;
+
 	if (chessMap[y][x] == 0) return false;
-	//printf("%d   %d\n", x, y);
+
+	//行判断
 	for (int i = 1; i <= 4; ++i) {
 		if (x <= 0 || x >= 16 || y <= 0 || y >= 16) {
 			break;
@@ -175,11 +172,12 @@ bool checkWin()
 		}
 		else break;
 	}
-	//printf("行有%d\n", num);
 	if (chessNum >= 5) {
 		return true;
 	}
 	else chessNum = 1;
+
+	//列判断
 	for (int i = 1; i <= 4; ++i) {
 		if (x <= 0 || x >= 16 || y <= 0 || y >= 16) {
 			break;
@@ -198,11 +196,12 @@ bool checkWin()
 		}
 		else break;
 	}
-	//printf("列有%d\n", num);
 	if (chessNum >= 5) {
 		return true;
 	}
 	else chessNum = 1;
+
+	//对角判断
 	for (int i = 1; i <= 4; ++i) {
 		if (x <= 0 || x >= 16 || y <= 0 || y >= 16) {
 			break;
@@ -221,7 +220,6 @@ bool checkWin()
 		}
 		else break;
 	}
-	//printf("斜线有%d\n", num);
 	if (chessNum >= 5) {
 		return true;
 	}
@@ -255,11 +253,7 @@ bool checkWin()
 	}
 }
 
-void updateGameMap(ChessPos* pos)
-{
-	chessPos[++stepNum] = *pos;
-}
-
+//函数功能：控制重新开始新的棋局功能
 void dispose()
 {
 	MOUSEMSG msg;
@@ -273,34 +267,43 @@ void dispose()
 	}
 }
 
+//函数功能：悔棋功能
 void regretStep()
 {
+	//棋盘变空且人换回来
+	chessMap[chessPos[stepNum].y][chessPos[stepNum].x] = 0;
+	playerFlag = -playerFlag;
+
+	//处理画面上棋子的删除
+	deleteStep(&chessPos[stepNum]);
+	stepNum--;
+
+	//如果人机对战，直接退两步
+	if (playType == false && stepNum) {
 		chessMap[chessPos[stepNum].y][chessPos[stepNum].x] = 0;
-		playerFlag = -playerFlag;	
+		playerFlag = -playerFlag;
 		deleteStep(&chessPos[stepNum]);
 		stepNum--;
-		if (playType == false && stepNum) {
-			chessMap[chessPos[stepNum].y][chessPos[stepNum].x] = 0;
-			playerFlag = -playerFlag;
-			deleteStep(&chessPos[stepNum]);
-			stepNum--;
-		}
+	}
 }
 
+//函数功能：辅助悔棋功能（删除画面上的棋子）
 void deleteStep(ChessPos* pos)
 {
 	int x = margin_x + chessSize * pos->x;
 	int y = margin_y + chessSize * pos->y;
 	setfillcolor(RGB(170, 243, 255));
-	solidrectangle(x-chessSize/2,y-chessSize/2,x+chessSize/2,y+chessSize/2);
+	solidrectangle(x - chessSize / 2, y - chessSize / 2, x + chessSize / 2, y + chessSize / 2);
 	playerFlag = -playerFlag;
 	line(x - chessSize / 2, y, x + chessSize / 2, y);
 	line(x, y - chessSize / 2, x, y + chessSize / 2);
 	return;
 }
 
+//函数功能：记录落子及更改下棋方
 void updateMap(ChessPos* pos)
 {
 	chessMap[pos->y][pos->x] = playerFlag ? 1 : -1;
 	playerFlag = !playerFlag;//交换下棋方
+	chessPos[++stepNum] = *pos;
 }
